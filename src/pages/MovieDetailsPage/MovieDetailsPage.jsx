@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { apiMovieDetails } from '../../services/api';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
@@ -40,14 +40,26 @@ function MovieDetailsPage() {
       <hr />
       <h3>Additional information</h3>
       <nav className={css.nav}>
-        <NavLink to={`cast`} className={buildLinkClass}>
+        <NavLink
+          to={`cast`}
+          state={backLinkHref}
+          replace
+          className={buildLinkClass}
+        >
           Cast
         </NavLink>
-        <NavLink to={`reviews`} className={buildLinkClass}>
+        <NavLink
+          to={`reviews`}
+          state={backLinkHref}
+          replace
+          className={buildLinkClass}
+        >
           Reviews
         </NavLink>
       </nav>
-      <Outlet />
+      <Suspense fallback={<p>Loading subpage...</p>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

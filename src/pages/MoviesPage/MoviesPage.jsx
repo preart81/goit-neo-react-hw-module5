@@ -1,8 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
-import MovieList from '../../components/MovieList/MovieList';
 import { apiSearch } from '../../services/api';
 import { useEffect, useState } from 'react';
+import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const MoviesPage = () => {
   const [params, setParams] = useSearchParams();
@@ -10,6 +12,11 @@ const MoviesPage = () => {
   const [moviesList, setMoviesList] = useState([]);
 
   const query = params.get('query') ?? '';
+
+  iziToast.settings({
+    position: 'topRight',
+    transitionIn: 'bounceInDown',
+  });
 
   const getMovies = async () => {
     try {
@@ -24,25 +31,30 @@ const MoviesPage = () => {
   };
 
   useEffect(() => {
+    if (!query) {
+      return;
+    }
     getMovies();
-    return () => {
-      // setParams({});
-    };
+    return () => {};
   }, [query]);
 
   // console.log(params);
 
   const handleParamChange = e => {
     e.preventDefault();
-    params.set('query', e.target.query.value);
-    setParams(params);
-    e.target.reset();
+    const queryText = e.target.query.value.trim();
 
-    const query = params.get('query') ?? '';
-    if (!query) {
+    if (!queryText) {
+      e.target.reset();
+      iziToast.error({
+        // title: 'Error',
+        message: 'Please enter a query',
+      });
       return;
     }
-
+    params.set('query', queryText);
+    setParams(params);
+    e.target.reset();
     getMovies();
   };
 
@@ -52,7 +64,8 @@ const MoviesPage = () => {
         <input
           type="text"
           name="query"
-          defaultValue={params.get('query') || ''}
+          placeholder="Search movies..."
+          // defaultValue={params.get('query') || ''}
         />
         <button type="submit">Search</button>
       </form>
