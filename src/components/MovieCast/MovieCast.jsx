@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { apiMovieCast } from '../../services/api';
 import { useEffect, useState } from 'react';
 import ActorCard from '../ActorCard/ActorCard';
+import css from './MovieCast.module.css';
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -28,9 +29,11 @@ const MovieCast = () => {
   return (
     <>
       {isLoading && <p>Loading...</p>}
-      <ul>
+      <ul className={css.castList}>
         {cast.map(actor => (
-          <ActorCard actor={actor} key={actor.id} />
+          <li className={css.castItem} key={actor.id}>
+            <ActorCard actor={actor} />
+          </li>
         ))}
       </ul>
     </>

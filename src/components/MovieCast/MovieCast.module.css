@@ -1,0 +1,19 @@
+.castList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.castItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 200px;
+  /* gap: 10px; */
+  /* border: 1px solid #ccc; */
+  /* border-radius: 5px; */
+  /* padding: 10px; */
+}

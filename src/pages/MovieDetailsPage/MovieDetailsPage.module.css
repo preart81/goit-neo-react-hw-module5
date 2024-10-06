@@ -1,6 +1,8 @@
 .nav {
   display: flex;
   gap: 8px;
+  margin: 8px;
+  font-size: 1.17em;
 }
 
 .link.active {

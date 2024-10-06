@@ -1,0 +1,13 @@
+.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.character {
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+}
