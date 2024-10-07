@@ -55,7 +55,6 @@ const MoviesPage = () => {
     params.set('query', queryText);
     setParams(params);
     e.target.reset();
-    getMovies();
   };
 
   return (

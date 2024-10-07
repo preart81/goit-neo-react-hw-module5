@@ -23,12 +23,14 @@ const MovieReviews = () => {
     };
     fetchReviews();
     return () => {};
-  }, []);
+  }, [movieId]);
 
   return (
     <>
       {isLoading && <p>Loading...</p>}
-      {reviews.length === 0 && <p>We don&apos;t have any reviews for this movie</p>}
+      {reviews.length === 0 && (
+        <p>We don&apos;t have any reviews for this movie</p>
+      )}
       <ul>
         {reviews.map(review => (
           <MovieReviewItem key={review.id} review={review} />
